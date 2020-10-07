@@ -10,6 +10,12 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+      integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark">
@@ -52,7 +58,11 @@
           </div>
         </div>
 
-        <div id="expenseTable"></div>
+        <div>
+          <ul class="list-group" id="expenseTable"></ul>
+        </div>
+
+        <div></div>
       </div>
     </div>
 
@@ -102,9 +112,9 @@
         //   <div>${data2Text}</div>
         // `;
 
-        const allExpenseHTML = allExpenses.map((expense) => {
-          return `<div> ${expense.amount} :: ${expense.desc} </div>`;
-        });
+        const allExpenseHTML = allExpenses.map((expense) =>
+          createListItem(expense)
+        );
 
         //.join() joins the array of strings and then returns a string
         const joinedAllExpenseHTML = allExpenseHTML.join("");
@@ -115,6 +125,21 @@
       }
 
       element.addEventListener("click", addExpenseToTotal, false);
+
+      function createListItem({ desc, amount }) {
+        return `<li class="list-group-item d-flex justify-content-between">
+              <div class="d-flex flex-column">
+                ${desc}
+                <small class="text-muted">March 11, 2019</small>
+              </div>
+              <div>
+                <span class="px-5"> ${amount} </span>
+                <button type="button" class="btn btn-outline-danger btn-sm">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </li>`;
+      }
     </script>
   </body>
 </html>
